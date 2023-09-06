@@ -56,13 +56,14 @@ function Calculator() {
     const [recordingTime, setRecordingTime] = useState('');
     const [results, setResults] = useState([]);
     const [savtBtnText, setSaveBtnText] = useState("skip");
-
+    const [items, setItems] = useState(JSON.parse(localStorage.getItem("QBounceHistory")) || []); 
+    
     useEffect(() => {
         let timer;
         if (state === "recording") {
             const startTime = Date.now();
             timer = setInterval(() => {
-                setElapsedTime((Date.now() - startTime) / 1000);
+                setElapsedTime(((Date.now() - startTime) / 1000));
             }, 10);
         }
         return () => clearInterval(timer);
@@ -125,10 +126,11 @@ function Calculator() {
 
     function handleSave() {
         if (!results[0].name) {
-            setResults([{ ...results[0], name: "Unnamed result" }]);
+            setResults([{ ...results[0], name: "Unnamed result"}]);
         }
         const items = JSON.parse(localStorage.getItem('QBounceHistory')) || [];
         items.push(results[0]);
+        setItems(items);
         localStorage.setItem('QBounceHistory', JSON.stringify(items));
         resetState();
     }
@@ -145,9 +147,6 @@ function Calculator() {
     }
     const handleTimeChange = (e) => {
         const newTime = parseFloat(e.target.value);
-        console.log(newTime);
-        console.log(state)
-        console.log("isNaN(newTime)",isNaN(newTime))
         if ((state === "pre-record" || state === "submit-time") && !isNaN(newTime)) {
             setElapsedTime(newTime);
             state === "pre-record" && setState("submit-time");
@@ -155,6 +154,12 @@ function Calculator() {
         }
     };
     return (
+        <>
+        
+        <div className="container ">
+        <h1>
+            Qbounce
+        </h1>
         <div className="container mt-4">
             <div className="d-flex mb-3">
                 <InputTimer elapsedTime={elapsedTime} isTiming={!(state === "pre-record" || state === "submit-time")} onChange={handleTimeChange} />
@@ -169,10 +174,17 @@ function Calculator() {
                     }[state]}
                 />
             </div>
-            {state === "showing-results" && (
+            {(state === "showing-results" || state === "take-name-input") && (
                 <>
-                    <ResultList results={results} />
-                    <ActionButtons onSave={getName} onDiscard={resetState} />
+                <h2>
+                    your new result
+                </h2>
+                <ResultList results={results} 
+                    onDelete={resetState}
+                    onSave={getName}
+                    setResults={setResults}
+                />
+                <p>you must save or delete the result to continue</p>
                 </>
             )}
             {state === "take-name-input" && (
@@ -189,6 +201,17 @@ function Calculator() {
             )}
 
         </div>
+        <h1>History</h1>
+        <ResultList results={items} 
+            onDelete={(e) => {
+                console.log(e.target.id);
+                const newItems = items.filter((item) => item.timeofsubmission !== e.target.id);
+                localStorage.setItem('QBounceHistory', JSON.stringify(newItems));
+                setItems(newItems)
+            }}
+        />
+    </div>
+    </>
     );
 }
 

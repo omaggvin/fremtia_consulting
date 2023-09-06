@@ -37,17 +37,7 @@ export default function QbounceNav() {
                         Calculator
                         </Link>
                     </div>
-                    <div className="col">
-                        <Link
-                            to="/qbounce/history"
-                            style={{
-                                textDecoration: "none",
-                                color: "black",
-                            }}
-                        >
-                            History
-                        </Link>
-                    </div>
+                    
                     
                 </div>
             </div>
