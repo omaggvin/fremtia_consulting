@@ -32,14 +32,7 @@ function ControlButton({ label, onClick }) {
     );
 }
 
-function ActionButtons({ onSave, onDiscard }) {
-    return (
-        <div className="d-flex justify-content-between mt-3">
-            <button className="btn btn-success" onClick={onSave}>Save Result</button>
-            <button className="btn btn-danger" onClick={onDiscard}>Discard Result</button>
-        </div>
-    );
-}
+
 async function getHeigthfromTime(time) {
     const theta = {
         a: 1.8481726293897065, 
