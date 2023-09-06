@@ -1,0 +1,5 @@
+/*make the color scheme of the app, in css variables*/
+:root {
+    --primary-color: #888282;
+    --secondary-color: #f2f2f2;
+}
