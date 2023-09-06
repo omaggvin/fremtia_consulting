@@ -16,9 +16,10 @@ function formatDate(dateString) {
 }
 
 
-export default function ResultList({ results, onDelete, onEdit, onSave, editId, setResults }) {
+export default function ResultList({results, onDelete, onEdit, onSave, setResults, ...props}) {
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('timeofsubmission');
+    const [editId, setEditId] = React.useState(props.editId);
 
     const handleSort = (property) => (event) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -94,7 +95,9 @@ export default function ResultList({ results, onDelete, onEdit, onSave, editId, 
                             <CellActions
                                 result={result}
                                 onDelete={onDelete}
-                                onEdit={onEdit}
+                                onEdit={onEdit && (() => setEditId(result.timeofsubmission))
+                                    
+                                }
                                 onSave={onSave}
                             />
                             )}
