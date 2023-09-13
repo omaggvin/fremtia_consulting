@@ -3,13 +3,6 @@ import { Outlet, Link } from "react-router-dom";
 export default function QbounceNav() {
     return (
         <>
-            {/*
-            make the subnavbar for qbounce here.
-            -history
-            -height calculator
-            -info
-            it is bellow:
-            */}
             <div className="container secnav">
                 
                 <div className="row">
