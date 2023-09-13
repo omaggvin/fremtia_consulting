@@ -9,7 +9,7 @@ function InputTimer({ elapsedTime, isTiming, onChange }) {
             type="number"
             className="form-control mr-2"
             placeholder="Enter time..."
-            //if it has more than 2 decimals, round it to 2 decimals
+            
             value={ elapsedTime % 1 !== 0
                 ?
                     Math.round(elapsedTime * 100) / 100

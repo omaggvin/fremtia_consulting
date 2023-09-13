@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
     return (
         <>
-            {/* 
-    create a navbar and style it in this file. if you use a liberary remember to import it and explain it below.
-    
-    */}
             <nav className="navbar navbar-expand-lg navbar-light bg-secondary
             ">
                 <div className="container-fluid">
