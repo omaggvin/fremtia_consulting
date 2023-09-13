@@ -202,6 +202,7 @@ function Calculator() {
                 localStorage.setItem('QBounceHistory', JSON.stringify(newItems));
                 setItems(newItems)
             }}
+            onEdit={true}
         />
     </div>
     </>
